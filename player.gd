@@ -1,25 +1,44 @@
 extends CharacterBody2D
 
-
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-
-
+@onready var main = get_tree().get_root().get_node("main")
+@onready var projectile = load("res://projectile.tscn")
+const SPEED = 600.0
+const DECEL = 15
+var can_attack = true
+const WAIT_TIME = 0.1
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	var input := Vector2(
+	Input.get_axis("ui_left", "ui_right"),
+	Input.get_axis("ui_up", "ui_down")
+)
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
+	if input != Vector2.ZERO:
+		velocity = input * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
+		velocity = velocity.move_toward(Vector2.ZERO, DECEL)
+	
+	shoot()
 	move_and_slide()
+
+func shoot():
+	if can_attack:
+		can_attack = false
+		get_tree().create_timer(WAIT_TIME).timeout.connect(func(): can_attack = true)
+		
+		var input_x = Input.get_axis("shoot_left", "shoot_right")
+		var input_y = Input.get_axis("shoot_up", "shoot_down")
+
+
+		if input_x != 0:
+			var instance = projectile.instantiate()
+			get_parent().add_child(instance)
+			instance.global_position = global_position + Vector2(67 * input_x, 0)
+		elif input_y != 0:
+			var instance = projectile.instantiate()
+			get_parent().add_child(instance)
+			instance.global_position = global_position + Vector2(0, 67 * input_y)
+	
+
+
+		
