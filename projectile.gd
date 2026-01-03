@@ -1,20 +1,29 @@
 extends CharacterBody2D
 
-@export var SPEED = 1000
-var spawnPos : Vector2
+
+var WAIT_TIME: float
+var PROJECTILE_SPEED: float
+var PROJECTILE_DAMAGE: int
+var EXPLOSION_RADIUS: float
+var EXPLOSION_DAMAGE: float
 
 
+var PLAYER: CharacterBody2D
+
+@onready var explosion = load("res://explosion.tscn")
 
 func _ready() -> void:
 	var x_dir = Input.get_axis("shoot_left", "shoot_right")
 	var y_dir = Input.get_axis("shoot_up", "shoot_down")
-	
-	if x_dir != 0:
-		velocity.x = x_dir * SPEED
-	else:
-		velocity.y = y_dir * SPEED
+	PLAYER = get_tree().current_scene.get_node("Player")
 
-func _physics_process(delta: float) -> void:
+	if x_dir != 0:
+		velocity.x = x_dir * PROJECTILE_SPEED
+	else:
+		velocity.y = y_dir * PROJECTILE_SPEED
+	
+
+func _physics_process(_delta: float) -> void:
 	
 	move_and_slide()
 	
@@ -22,4 +31,11 @@ func _physics_process(delta: float) -> void:
 		var col = get_slide_collision(i)
 		if col.get_collider() is TileMapLayer:
 			queue_free()
-	
+
+func explode():
+	var e = explosion.instantiate()
+	e.global_position = global_position
+	e.radius = EXPLOSION_RADIUS
+	e.damage = EXPLOSION_DAMAGE * PROJECTILE_DAMAGE
+	get_parent().add_child(e)
+	queue_free()

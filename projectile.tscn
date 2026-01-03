@@ -4,16 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://bsxh83t6v2wj4" path="res://assets/textures/projectile_normal.png" id="2_dgwo2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sxmqc"]
-radius = 11.0
+radius = 15.0
 
 [node name="Projectile" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("1_qxf0c")
+explosion_radius = null
+explosion_damage = null
 
 [node name="normal" type="Sprite2D" parent="."]
-position = Vector2(2.2888184e-05, -2.2888184e-05)
-scale = Vector2(0.10156249, 0.10156249)
+position = Vector2(4.7683716e-07, -4.7683716e-07)
+scale = Vector2(0.2007811, 0.2007811)
 texture = ExtResource("2_dgwo2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
