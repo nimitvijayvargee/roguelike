@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://dqxohrvtcj353"]
+[gd_scene load_steps=13 format=4 uid="uid://dqxohrvtcj353"]
 
 [ext_resource type="Texture2D" uid="uid://dvseq1h4md07a" path="res://assets/textures/tilemap.png" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://cq3vw4xe3sfds" path="res://player.gd" id="2_1bvp3"]
@@ -828,7 +828,7 @@ sources/0 = SubResource("TileSetAtlasSource_7mycd")
 size = Vector2(128, 128)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
-bg_color = Color(0.39215687, 0.6862745, 0.3019608, 0.2627451)
+bg_color = Color(0.39215687, 0.6862745, 0.3019608, 0.5882353)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -842,14 +842,14 @@ border_width_right = 4
 border_width_bottom = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
-bg_color = Color(0.6, 0.6, 0.6, 0.29411766)
+bg_color = Color(0, 0, 0, 0.5882353)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
-bg_color = Color(0.20784314, 0.6784314, 0.65882355, 0.2627451)
+bg_color = Color(0.20784314, 0.6784314, 0.65882355, 0.5882353)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -857,6 +857,13 @@ border_width_bottom = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mycd"]
 bg_color = Color(0.20735058, 0.68006086, 0.65954, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vw27"]
+bg_color = Color(0, 0, 0, 0.5882353)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -879,21 +886,21 @@ texture = ExtResource("3_lquwl")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_5vw27")
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Camera" type="Camera2D" parent="Player"]
 zoom = Vector2(0.4, 0.4)
 
-[node name="HealthBar" type="ProgressBar" parent="Player/Camera2D"]
-offset_left = -2400.0
-offset_top = 1256.0
-offset_right = 240.0
-offset_bottom = 1350.0
+[node name="HealthBar" type="ProgressBar" parent="Player/Camera"]
+offset_left = -2200.0
+offset_top = 958.0
+offset_right = 440.0
+offset_bottom = 1052.0
 theme_override_styles/background = SubResource("StyleBoxFlat_h2yge")
 theme_override_styles/fill = SubResource("StyleBoxFlat_1bvp3")
 step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="Player/Camera2D/HealthBar"]
+[node name="Label" type="Label" parent="Player/Camera/HealthBar"]
 layout_mode = 0
 offset_left = 2640.0
 offset_right = 3007.0
@@ -902,18 +909,18 @@ theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxFlat_272bh")
 text = "100/100"
 
-[node name="StaminaBar" type="ProgressBar" parent="Player/Camera2D"]
-offset_left = -2400.0
-offset_top = 1162.0
-offset_right = -158.0
-offset_bottom = 1256.0
+[node name="StaminaBar" type="ProgressBar" parent="Player/Camera"]
+offset_left = -2200.0
+offset_top = 864.0
+offset_right = 42.0
+offset_bottom = 958.0
 theme_override_styles/background = SubResource("StyleBoxFlat_lquwl")
 theme_override_styles/fill = SubResource("StyleBoxFlat_7mycd")
 step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="Player/Camera2D/StaminaBar"]
+[node name="Label" type="Label" parent="Player/Camera/StaminaBar"]
 layout_mode = 0
 offset_left = 2242.0
 offset_right = 3007.0
@@ -922,3 +929,15 @@ theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxFlat_272bh")
 text = "220/200"
 vertical_alignment = 1
+
+[node name="EffectUI" type="RichTextLabel" parent="Player/Camera"]
+offset_left = -2200.0
+offset_top = 98.0
+offset_right = -1586.0
+offset_bottom = 864.0
+theme_override_font_sizes/normal_font_size = 60
+theme_override_font_sizes/bold_font_size = 75
+theme_override_font_sizes/italics_font_size = 60
+theme_override_styles/background = SubResource("StyleBoxFlat_5vw27")
+bbcode_enabled = true
+vertical_alignment = 2
