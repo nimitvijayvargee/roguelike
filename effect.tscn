@@ -52,7 +52,7 @@ step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="Duration"]
+[node name="Time" type="Label" parent="Duration"]
 layout_mode = 0
 offset_left = 983.0
 offset_right = 1184.0

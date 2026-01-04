@@ -30,12 +30,11 @@ func _physics_process(_delta: float) -> void:
 	for i in get_slide_collision_count():
 		var col = get_slide_collision(i)
 		if col.get_collider() is TileMapLayer:
-			queue_free()
+			explode()
 
 func explode():
 	var e = explosion.instantiate()
 	e.global_position = global_position
-	e.radius = EXPLOSION_RADIUS
-	e.damage = EXPLOSION_DAMAGE * PROJECTILE_DAMAGE
 	get_parent().add_child(e)
+	e.restart()
 	queue_free()
