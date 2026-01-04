@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://desndhcbnn65b"]
+
+[node name="Effect" type="Node2D"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 241.0
+offset_bottom = 48.0
+bbcode_enabled = true
+text = "[b]Confused[/b] [i][00:00][/i]
+Watch your step"
