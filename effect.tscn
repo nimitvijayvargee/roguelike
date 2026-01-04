@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://desndhcbnn65b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2t0m4"]
+bg_color = Color(0, 0, 0, 0.5882353)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8k7fc"]
+bg_color = Color(0.86915064, 0.43323815, 0.63559157, 0.5882353)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ce50g"]
+bg_color = Color(0.87058824, 0.43137255, 0.63529414, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lnuxy"]
+bg_color = Color(0, 0, 0, 0.5882353)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+
+[node name="Effect" type="Node2D"]
+
+[node name="Description" type="RichTextLabel" parent="."]
+offset_top = -284.0
+offset_right = 1183.0
+offset_bottom = -94.0
+theme_override_font_sizes/normal_font_size = 60
+theme_override_font_sizes/bold_font_size = 75
+theme_override_font_sizes/italics_font_size = 60
+theme_override_styles/background = SubResource("StyleBoxFlat_2t0m4")
+bbcode_enabled = true
+text = "[b]Confused[/b]
+you gotta watch your step dude"
+vertical_alignment = 2
+
+[node name="Duration" type="ProgressBar" parent="."]
+offset_top = -94.0
+offset_right = 983.0
+theme_override_styles/background = SubResource("StyleBoxFlat_8k7fc")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ce50g")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Duration"]
+layout_mode = 0
+offset_left = 983.0
+offset_right = 1184.0
+offset_bottom = 94.0
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_lnuxy")
+text = "[00:00]"

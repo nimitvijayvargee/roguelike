@@ -160,4 +160,4 @@ func update_effect_ui():
 				player_active_effects[effect]
 			) + "\n\n"
 			
-	$Camera/EffectUI.text = text
+	$Camera/EffectUIHandler/Effect/Duration/Labeld.text = text

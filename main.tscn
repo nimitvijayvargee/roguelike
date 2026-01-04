@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dvseq1h4md07a" path="res://assets/textures/tilemap.png" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://cq3vw4xe3sfds" path="res://player.gd" id="2_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://bvhrbudhfluj2" path="res://icon.svg" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://desndhcbnn65b" path="res://effect.tscn" id="4_1bvp3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
 texture = ExtResource("1_h2yge")
@@ -862,13 +863,6 @@ border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vw27"]
-bg_color = Color(0, 0, 0, 0.5882353)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-
 [node name="main" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -930,14 +924,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_272bh")
 text = "220/200"
 vertical_alignment = 1
 
-[node name="EffectUI" type="RichTextLabel" parent="Player/Camera"]
-offset_left = -2200.0
-offset_top = 98.0
-offset_right = -1586.0
-offset_bottom = 864.0
-theme_override_font_sizes/normal_font_size = 60
-theme_override_font_sizes/bold_font_size = 75
-theme_override_font_sizes/italics_font_size = 60
-theme_override_styles/background = SubResource("StyleBoxFlat_5vw27")
-bbcode_enabled = true
-vertical_alignment = 2
+[node name="EffectUIHandler" type="Node2D" parent="Player/Camera"]
+position = Vector2(-2200, 864)
+
+[node name="Effect" parent="Player/Camera/EffectUIHandler" instance=ExtResource("4_1bvp3")]
