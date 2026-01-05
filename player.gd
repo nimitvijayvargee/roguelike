@@ -25,8 +25,11 @@ var projectile_properties := {
 	"WAIT_TIME": 0.1,
 	"PROJECTILE_SPEED": 1600,
 	"PROJECTILE_DAMAGE": 2,
-	"EXPLOSION_RADIUS": 100,
-
+	
+	"EXPLOSION_COLOR": "AD3F00",
+	"EXPLOSION_COLOR_HUE_MIN":-0.2,
+	"EXPLOSION_COLOR_HUE_MAX":0,
+	
 	"REGEN_TIME": 1.0,
 	"REGEN_QUANTITY": 1,
 	"REGEN_TICKER": 0.0
@@ -36,7 +39,9 @@ func _ready():
 	$Camera/HealthBar.max_value = player_stats["MAX_HEALTH"]
 	$Camera/StaminaBar.max_value = player_stats["PROJECTILE_LIMIT"]
 	set_bars()
-
+	
+	load_room("room1")
+	
 func _physics_process(delta: float):
 	var input := Vector2(
 		Input.get_axis("ui_left", "ui_right"),
@@ -108,9 +113,6 @@ func shoot():
 	player_stats["PROJECTILE_REMAINING"] -= 1
 	set_bars()
 
-	if player_stats["PROJECTILE_REMAINING"] == 200:
-		add_effect("CONFUSION", 10.0)
-
 func set_bars():
 	$Camera/HealthBar.value = player_stats["HEALTH"]
 	$Camera/StaminaBar.value = player_stats["PROJECTILE_REMAINING"]
@@ -122,7 +124,12 @@ func add_effect(effect: String, duration: float):
 
 	if effect == "CONFUSION":
 		player_stats["SPEED"] = -abs(player_stats["SPEED"])
-
+		
+	elif effect == "CONFETTI":
+		projectile_properties["EXPLOSION_COLOR"] = "#FF0000"
+		projectile_properties["EXPLOSION_COLOR_HUE_MIN"] = -1
+		projectile_properties["EXPLOSION_COLOR_HUE_MAX"] = 1
+		
 	var ui = effect_description.instantiate()
 	$Camera/EffectUIHandler.add_child(ui)
 	effect_nodes[effect] = ui
@@ -145,7 +152,9 @@ func update_effect_ui(effect: String):
 
 	ui.get_node("Duration").get_node("Time").text = "[%02d:%02d]" % [mins, secs]
 	if effect == "CONFUSION":
-		ui.get_node("Description").text = build_effect_text("Confused", "Watch your step")
+		ui.get_node("Description").text = build_effect_text("Confused", "don't trip!")
+	elif effect == "CONFETTI":
+		ui.get_node("Description").text = build_effect_text("Confetti", "party time!")
 
 func remove_effect(effect: String):
 	if effect_nodes.has(effect):
@@ -156,6 +165,19 @@ func remove_effect(effect: String):
 
 	if effect == "CONFUSION":
 		player_stats["SPEED"] = abs(player_stats["SPEED"])
+	if effect == "CONFETTI":
+		projectile_properties["EXPLOSION_COLOR"] = "#AD3F00"
+		projectile_properties["EXPLOSION_COLOR_HUE_MIN"] = -0.2
+		projectile_properties["EXPLOSION_COLOR_HUE_MAX"] = 0
 
 func build_effect_text(title: String, description: String):
 	return "[b]%s[/b]\n%s" % [title, description]
+
+func load_room(id: String):
+	var scene := load("res://" + id + ".tscn") as PackedScene
+	print(scene)
+
+	var room := scene.instantiate()
+
+	print(room.name)
+	get_tree().current_scene.add_child(room)

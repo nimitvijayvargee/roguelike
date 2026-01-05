@@ -30,8 +30,8 @@ scale_max = 48.059998
 scale_curve = SubResource("CurveTexture_q7epf")
 color = Color(0.6784314, 0.24705882, 0, 1)
 alpha_curve = SubResource("CurveTexture_vxas0")
-hue_variation_min = -0.25000003
-hue_variation_max = -0.030000022
+hue_variation_min = -0.21000002
+hue_variation_max = -0.020000022
 anim_speed_max = 2.1599998
 
 [node name="Explosion" type="GPUParticles2D"]

@@ -21,3 +21,9 @@ texture = ExtResource("3_lquwl")
 shape = SubResource("RectangleShape2D_5vw27")
 
 [node name="Camera" parent="Player" instance=ExtResource("4_1bvp3")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(-968, -802)
+polygon = PackedVector2Array(0, -1, 347, -5, 3564, -12, 3546, 1045, 4298, 1036, 4262, 355, 5381, 346, 5381, 2853, 4253, 2826, 4182, 2432, 3573, 2773, 8, 2562, 14, -7, 328, 322, 328, 2242, 3208, 2242, 3207, 1922, 4647, 1922, 4647, 2243, 4968, 2242, 4968, 962, 4648, 962, 4648, 1442, 3208, 1442, 3208, 324, 328, 322)

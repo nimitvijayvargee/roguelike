@@ -6,8 +6,9 @@ var PROJECTILE_SPEED: float
 var PROJECTILE_DAMAGE: int
 var EXPLOSION_RADIUS: float
 var EXPLOSION_DAMAGE: float
-
-
+var EXPLOSION_COLOR: String
+var EXPLOSION_COLOR_HUE_MIN: float
+var EXPLOSION_COLOR_HUE_MAX: float
 var PLAYER: CharacterBody2D
 
 @onready var explosion = load("res://explosion.tscn")
@@ -35,6 +36,12 @@ func _physics_process(_delta: float) -> void:
 func explode():
 	var e = explosion.instantiate()
 	e.global_position = global_position
+	var mat := e.process_material as ParticleProcessMaterial
+	mat.color = Color(EXPLOSION_COLOR)
+	print(EXPLOSION_COLOR)
+	mat.hue_variation_min = EXPLOSION_COLOR_HUE_MIN
+	mat.hue_variation_max = EXPLOSION_COLOR_HUE_MAX
+
 	get_parent().add_child(e)
 	e.restart()
 	queue_free()
