@@ -39,9 +39,12 @@ func _ready():
 	$Camera/HealthBar.max_value = player_stats["MAX_HEALTH"]
 	$Camera/StaminaBar.max_value = player_stats["PROJECTILE_LIMIT"]
 	set_bars()
-	
-	load_room("room1")
-	
+	#load_room("room1")
+
+func _input(ev):
+	if Input.is_action_pressed("spawn_enemy"):
+		print("SPAWN")
+
 func _physics_process(delta: float):
 	var input := Vector2(
 		Input.get_axis("ui_left", "ui_right"),
@@ -173,11 +176,11 @@ func remove_effect(effect: String):
 func build_effect_text(title: String, description: String):
 	return "[b]%s[/b]\n%s" % [title, description]
 
-func load_room(id: String):
-	var scene := load("res://" + id + ".tscn") as PackedScene
-	print(scene)
-
-	var room := scene.instantiate()
-
-	print(room.name)
-	get_tree().current_scene.add_child(room)
+#func load_room(id: String):
+	#var scene := load("res://" + id + ".tscn") as PackedScene
+	#print(scene)
+#
+	#var room := scene.instantiate()
+#
+	#print(room.name)
+	#get_tree().current_scene.add_child(room)

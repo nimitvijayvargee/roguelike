@@ -30,15 +30,16 @@ func _physics_process(_delta: float) -> void:
 	
 	for i in get_slide_collision_count():
 		var col = get_slide_collision(i)
-		if col.get_collider() is TileMapLayer:
+		if col.get_collider() is TileMapLayer or CharacterBody2D:
 			explode()
+		if col.get_collider() is CharacterBody2D:
+			col.get_collider().damage(PROJECTILE_DAMAGE, self)
 
 func explode():
 	var e = explosion.instantiate()
 	e.global_position = global_position
 	var mat := e.process_material as ParticleProcessMaterial
 	mat.color = Color(EXPLOSION_COLOR)
-	print(EXPLOSION_COLOR)
 	mat.hue_variation_min = EXPLOSION_COLOR_HUE_MIN
 	mat.hue_variation_max = EXPLOSION_COLOR_HUE_MAX
 
