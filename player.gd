@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var main = get_tree().get_root().get_node("main")
 @onready var projectile = preload("res://projectile.tscn")
 @onready var effect_description = preload("res://effect.tscn")
-
+@onready var explosion = preload("res://explosion.tscn")
 var can_attack := true
 
 var player_stats := {
@@ -39,9 +39,10 @@ func _ready():
 	$Camera/HealthBar.max_value = player_stats["MAX_HEALTH"]
 	$Camera/StaminaBar.max_value = player_stats["PROJECTILE_LIMIT"]
 	set_bars()
-	#load_room("room1")
+	var scene := load("res://room1.tscn") as PackedScene
+	load_room(scene.instantiate())
 
-func _input(ev):
+func _input(_ev):
 	if Input.is_action_pressed("spawn_enemy"):
 		print("SPAWN")
 
@@ -176,11 +177,41 @@ func remove_effect(effect: String):
 func build_effect_text(title: String, description: String):
 	return "[b]%s[/b]\n%s" % [title, description]
 
-#func load_room(id: String):
-	#var scene := load("res://" + id + ".tscn") as PackedScene
-	#print(scene)
-#
-	#var room := scene.instantiate()
-#
-	#print(room.name)
-	#get_tree().current_scene.add_child(room)
+func damage(amount: int) -> void:
+	player_stats["HEALTH"] -= amount
+	set_bars()
+	if player_stats["HEALTH"] <= 0:
+		kill_self()
+
+func kill_self() -> void:
+	
+	var e = explosion.instantiate()
+	e.global_position = global_position
+	
+	var mat := e.process_material.duplicate() as ParticleProcessMaterial
+	e.process_material = mat
+	mat.color = Color(projectile_properties["EXPLOSION_COLOR"])
+	mat.hue_variation_min = projectile_properties["EXPLOSION_COLOR_HUE_MIN"]
+	mat.hue_variation_max = projectile_properties["EXPLOSION_COLOR_HUE_MAX"]
+	mat.initial_velocity_min *= 0.3
+	mat.initial_velocity_max *= 0.3
+	mat.scale_min *= 2
+	mat.scale_max *= 2
+	mat.emission_sphere_radius *= 2
+	
+	e.amount = 40
+	
+	
+	get_parent().add_child(e)
+	e.restart()
+	e.queue_free()
+	var cam := $Camera
+	cam.get_parent().remove_child(cam)
+	get_tree().current_scene.add_child(cam)
+	cam.global_position = global_position
+	
+	queue_free()
+	
+	
+func load_room(room: Node2D) -> void:
+	main.add_child(room)

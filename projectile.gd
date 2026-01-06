@@ -45,4 +45,8 @@ func explode():
 
 	get_parent().add_child(e)
 	e.restart()
+	get_tree().create_timer(1).timeout.connect(
+		func(): e.queue_free()
+	)
+	
 	queue_free()
