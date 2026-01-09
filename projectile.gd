@@ -12,7 +12,8 @@ var EXPLOSION_COLOR_HUE_MAX: float
 var PLAYER: CharacterBody2D
 
 @onready var explosion = load("res://explosion.tscn")
-
+@onready var shoot_sfx = $ShootSFX
+@onready var wall_sfx = $WallSFX
 func _ready() -> void:
 	var x_dir = Input.get_axis("shoot_left", "shoot_right")
 	var y_dir = Input.get_axis("shoot_up", "shoot_down")
@@ -22,7 +23,7 @@ func _ready() -> void:
 		velocity.x = x_dir * PROJECTILE_SPEED
 	else:
 		velocity.y = y_dir * PROJECTILE_SPEED
-	
+	shoot_sfx.play()
 
 func _physics_process(_delta: float) -> void:
 	
@@ -30,10 +31,13 @@ func _physics_process(_delta: float) -> void:
 	
 	for i in get_slide_collision_count():
 		var col = get_slide_collision(i)
-		if col.get_collider() is TileMapLayer or CharacterBody2D:
-			explode()
 		if col.get_collider() is CharacterBody2D:
 			col.get_collider().damage(PROJECTILE_DAMAGE, self)
+			explode()
+		if col.get_collider() is TileMapLayer:
+			wall_sfx.reparent(get_parent())
+			wall_sfx.play()
+			explode()
 
 func explode():
 	var e = explosion.instantiate()

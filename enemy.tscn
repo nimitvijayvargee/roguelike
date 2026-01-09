@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhnuyn02bl022"]
+[gd_scene load_steps=7 format=3 uid="uid://dhnuyn02bl022"]
 
 [ext_resource type="Script" uid="uid://cxi6y0715a3fo" path="res://enemy.gd" id="1_4gyqm"]
 [ext_resource type="Texture2D" uid="uid://dgn4dc5hi3p5i" path="res://assets/textures/enemy.png" id="2_qi2p4"]
+[ext_resource type="AudioStream" uid="uid://c25pep6bwf861" path="res://assets/sfx/explosion.wav" id="3_qi2p4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7k104"]
 size = Vector2(128, 128)
@@ -42,3 +43,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_4gyqm")
 theme_override_styles/fill = SubResource("StyleBoxFlat_qi2p4")
 value = 50.0
 show_percentage = false
+
+[node name="Explosion" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_qi2p4")
+attenuation = 0.14358748

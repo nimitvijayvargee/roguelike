@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://ckb02r7ckyeys"]
+
+[node name="ConfettiCannon" type="Sprite2D"]

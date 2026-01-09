@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-var HEALTH := 200
-var MAX_HEALTH := 200 
+var HEALTH := 20
+var MAX_HEALTH := 20 
 
 var DAMAGE := 20
 var CONTACT_DAMAGE := 10
@@ -10,6 +10,7 @@ var SPEED = 200
 var PLAYER
 var CONTACT_COUNTER = 0
 @onready var explosion = preload("res://explosion.tscn")
+@onready var explosion_sfx = $Explosion
 
 func _ready() -> void:
 	$ProgressBar.max_value = MAX_HEALTH
@@ -46,9 +47,11 @@ func _physics_process(delta: float) -> void:
 func damage(amount: int, projectile: CharacterBody2D) -> void:
 	HEALTH -= amount
 	if HEALTH <= 0:
+		explosion_sfx.play()
+		
 		kill_self(projectile)
+		
 	
-
 func kill_self(projectile: CharacterBody2D) -> void:
 	
 	var e = explosion.instantiate()
@@ -66,9 +69,13 @@ func kill_self(projectile: CharacterBody2D) -> void:
 	mat.emission_sphere_radius *= 2
 	
 	e.amount = 40
-	
-	
+
 	get_parent().add_child(e)
 	e.restart()
-	
+	get_tree().create_timer(1).timeout.connect(
+		func(): e.queue_free()
+	)
+	explosion_sfx.reparent(get_parent())
+	explosion_sfx.play()
 	queue_free()
+	
