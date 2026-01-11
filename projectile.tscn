@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bsxh83t6v2wj4" path="res://assets/textures/projectile_normal.png" id="2_dgwo2"]
 [ext_resource type="AudioStream" uid="uid://reh3ii47l6ea" path="res://assets/sfx/laserShoot.wav" id="3_dgwo2"]
 [ext_resource type="AudioStream" uid="uid://di5ugtmqsey7j" path="res://assets/sfx/wallhit.wav" id="4_sxmqc"]
-[ext_resource type="Script" uid="uid://l7uklhpfvvv2" path="res://wall_sfx.gd" id="5_2xblw"]
+[ext_resource type="Script" uid="uid://l7uklhpfvvv2" path="res://audio_self_destruct.gd" id="5_2xblw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sxmqc"]
 radius = 15.0

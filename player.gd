@@ -39,8 +39,8 @@ func _ready():
 	$Camera/HealthBar.max_value = player_stats["MAX_HEALTH"]
 	$Camera/StaminaBar.max_value = player_stats["PROJECTILE_LIMIT"]
 	set_bars()
-	var scene := load("res://room1.tscn") as PackedScene
-	load_room(scene.instantiate())
+	#var scene := load("res://rooms/room1.tscn") as PackedScene
+	#load_room(scene.instantiate())
 
 func _input(_ev):
 	if Input.is_action_pressed("spawn_enemy"):

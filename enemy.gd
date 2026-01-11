@@ -8,14 +8,14 @@ var CONTACT_DAMAGE := 10
 
 var SPEED = 200
 var PLAYER
+var SpawnArea
 var CONTACT_COUNTER = 0
 @onready var explosion = preload("res://explosion.tscn")
-@onready var explosion_sfx = $Explosion
+@onready var ExplosionSFX = $Explosion
 
 func _ready() -> void:
 	$ProgressBar.max_value = MAX_HEALTH
 	PLAYER = get_tree().current_scene.get_node("Player")
-
 
 func _process(_delta: float) -> void:
 	$ProgressBar.value = HEALTH
@@ -47,7 +47,7 @@ func _physics_process(delta: float) -> void:
 func damage(amount: int, projectile: CharacterBody2D) -> void:
 	HEALTH -= amount
 	if HEALTH <= 0:
-		explosion_sfx.play()
+		ExplosionSFX.play()
 		
 		kill_self(projectile)
 		
@@ -75,7 +75,7 @@ func kill_self(projectile: CharacterBody2D) -> void:
 	get_tree().create_timer(1).timeout.connect(
 		func(): e.queue_free()
 	)
-	explosion_sfx.reparent(get_parent())
-	explosion_sfx.play()
+	ExplosionSFX.reparent(get_parent())
+	ExplosionSFX.play()
 	queue_free()
 	

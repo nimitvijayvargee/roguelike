@@ -1,16 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqxohrvtcj353"]
+[gd_scene load_steps=7 format=3 uid="uid://dqxohrvtcj353"]
 
+[ext_resource type="PackedScene" uid="uid://cde3i4ihfnbtx" path="res://rooms/room1/room1.tscn" id="1_lquwl"]
 [ext_resource type="Script" uid="uid://cq3vw4xe3sfds" path="res://player.gd" id="2_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://bvhrbudhfluj2" path="res://icon.svg" id="3_lquwl"]
 [ext_resource type="PackedScene" uid="uid://kjt1l61x1ht5" path="res://camera.tscn" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://bhciaxfv34dqp" path="res://camera.gd" id="4_7mycd"]
-[ext_resource type="PackedScene" uid="uid://ddnkm14sjl0ar" path="res://room1.tscn" id="4_lquwl"]
-[ext_resource type="PackedScene" uid="uid://dhnuyn02bl022" path="res://enemy.tscn" id="5_lquwl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vw27"]
 size = Vector2(128, 128)
 
 [node name="main" type="Node2D"]
+
+[node name="Room1" parent="." instance=ExtResource("1_lquwl")]
 
 [node name="Player" type="CharacterBody2D" parent="."]
 z_index = 4095
@@ -27,8 +28,3 @@ shape = SubResource("RectangleShape2D_5vw27")
 [node name="Camera" parent="Player" instance=ExtResource("4_1bvp3")]
 position = Vector2(1, 2)
 script = ExtResource("4_7mycd")
-
-[node name="Enemy" parent="." instance=ExtResource("5_lquwl")]
-position = Vector2(388, 0)
-
-[node name="Room1" parent="." instance=ExtResource("4_lquwl")]
