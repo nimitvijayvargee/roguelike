@@ -32,6 +32,7 @@ scale = Vector2(0.19595641, 0.19595645)
 texture = ExtResource("2_qi2p4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_7k104")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]

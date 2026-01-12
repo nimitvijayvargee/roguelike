@@ -12,7 +12,8 @@ var player_stats := {
 
 	"PROJECTILE_REMAINING": 250,
 	"PROJECTILE_LIMIT": 250,
-
+	"PROJECTILE_USAGE": 1,
+	
 	"SPEED": 900.0,
 	"ACCEL": 300.0 * 60,
 	"DECEL": 15.0 * 60
@@ -32,15 +33,15 @@ var projectile_properties := {
 	
 	"REGEN_TIME": 1.0,
 	"REGEN_QUANTITY": 1,
-	"REGEN_TICKER": 0.0
+	"REGEN_TICKER": 0.0,
+	
 }
 
 func _ready():
 	$Camera/HealthBar.max_value = player_stats["MAX_HEALTH"]
 	$Camera/StaminaBar.max_value = player_stats["PROJECTILE_LIMIT"]
 	set_bars()
-	#var scene := load("res://rooms/room1.tscn") as PackedScene
-	#load_room(scene.instantiate())
+	load_room("res://rooms/tutorial/tutorial1.tscn")
 
 func _input(_ev):
 	if Input.is_action_pressed("spawn_enemy"):
@@ -114,7 +115,7 @@ func shoot():
 		instance.global_position = global_position + Vector2(0, 67 * sign(input_y))
 		instance.velocity = Vector2(0, sign(input_y)) * projectile_properties["PROJECTILE_SPEED"]
 
-	player_stats["PROJECTILE_REMAINING"] -= 1
+	player_stats["PROJECTILE_REMAINING"] -= player_stats["PROJECTILE_USAGE"]
 	set_bars()
 
 func set_bars():
@@ -133,6 +134,8 @@ func add_effect(effect: String, duration: float):
 		projectile_properties["EXPLOSION_COLOR"] = "#FF0000"
 		projectile_properties["EXPLOSION_COLOR_HUE_MIN"] = -1
 		projectile_properties["EXPLOSION_COLOR_HUE_MAX"] = 1
+		
+		player_stats["PROJECTILE_USAGE"] = 0
 		
 	var ui = effect_description.instantiate()
 	$Camera/EffectUIHandler.add_child(ui)
@@ -173,6 +176,8 @@ func remove_effect(effect: String):
 		projectile_properties["EXPLOSION_COLOR"] = "#AD3F00"
 		projectile_properties["EXPLOSION_COLOR_HUE_MIN"] = -0.2
 		projectile_properties["EXPLOSION_COLOR_HUE_MAX"] = 0
+		
+		player_stats["PROJECTILE_USAGE"] = 1
 
 func build_effect_text(title: String, description: String):
 	return "[b]%s[/b]\n%s" % [title, description]
@@ -216,5 +221,10 @@ func kill_self() -> void:
 	queue_free()
 	
 	
-func load_room(room: Node2D) -> void:
-	main.add_child(room)
+func load_room(path: String) -> void:
+	var room = (load(path) as PackedScene).instantiate()
+	if get_parent().get_node("ROOM").get_child(0):
+		var old_room = get_parent().get_node("ROOM").get_child(0)
+		old_room.queue_free()
+	get_parent().get_node("ROOM").add_child(room)
+	global_position = room.get_node("SpawnPoint").global_position
