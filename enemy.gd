@@ -24,8 +24,6 @@ func _process(_delta: float) -> void:
 	else:
 		$ProgressBar.visible = true
 
-
-
 func _physics_process(delta: float) -> void:
 	if is_instance_valid(PLAYER):
 		var dir = (PLAYER.global_position - global_position).normalized()
