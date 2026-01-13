@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkqhlfov8g2fh"]
+
+[ext_resource type="Script" uid="uid://c0rdt8te6pwrc" path="res://items/coin.gd" id="1_omk8p"]
+[ext_resource type="Texture2D" uid="uid://clhmm2831qs30" path="res://assets/textures/items/coin.png" id="2_gnov0"]
+[ext_resource type="AudioStream" uid="uid://bu2t3gbu2r6cx" path="res://assets/sfx/coin.wav" id="3_omk8p"]
+[ext_resource type="Script" uid="uid://l7uklhpfvvv2" path="res://audio_self_destruct.gd" id="4_wg8a5"]
+
+[sub_resource type="Curve" id="Curve_yqq6o"]
+_data = [Vector2(0.50757575, 1), 0.0, 0.0, 0, 0, Vector2(0.9924243, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_c2rxh"]
+curve = SubResource("Curve_yqq6o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hbuv6"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 229.42
+initial_velocity_max = 229.42
+angular_velocity_min = 110.11998
+angular_velocity_max = 245.64998
+gravity = Vector3(0, 0, 0)
+scale_min = 15.87
+scale_max = 15.87
+color = Color(1, 0.84705883, 0, 1)
+alpha_curve = SubResource("CurveTexture_c2rxh")
+hue_variation_min = -0.28000003
+hue_variation_max = 0.029999977
+
+[node name="Coin" type="CharacterBody2D"]
+script = ExtResource("1_omk8p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_gnov0")
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+z_index = -1
+lifetime = 0.59
+process_material = SubResource("ParticleProcessMaterial_hbuv6")
+
+[node name="CoinSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_omk8p")
+script = ExtResource("4_wg8a5")

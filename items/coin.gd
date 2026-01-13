@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var PLAYER
-@onready var PowerUpSFX = $PowerUpSFX
+@onready var CoinSFX = $CoinSFX
 func _ready() -> void:
 	PLAYER = get_tree().current_scene.get_node("Player")
 
@@ -13,10 +13,8 @@ func _physics_process(_delta: float) -> void:
 		velocity = -100 * dir
 	else:
 		velocity = Vector2.ZERO
-	if distance < 100:
-		PLAYER.add_effect("CONFETTI", 20)
-		PowerUpSFX.reparent(get_parent())
-		
-		PowerUpSFX.play()
+	if distance < 150:
+		CoinSFX.reparent(get_parent())
+		CoinSFX.play()
 		queue_free()
 	move_and_slide()

@@ -14,7 +14,7 @@ func _physics_process(_delta: float) -> void:
 	else:
 		velocity = Vector2.ZERO
 	if distance < 100:
-		PLAYER.add_effect("CONFETTI", 20)
+		PLAYER.player_stats["HEALTH"] = min(PLAYER.player_stats["HEALTH"] + 30, PLAYER.player_stats["MAX_HEALTH"])
 		PowerUpSFX.reparent(get_parent())
 		
 		PowerUpSFX.play()

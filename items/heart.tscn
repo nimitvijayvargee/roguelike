@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://dt53u1fhslcpn"]
+
+[ext_resource type="Script" uid="uid://brvkhiu08exg2" path="res://items/heart.gd" id="1_3weh3"]
+[ext_resource type="Texture2D" uid="uid://iocweyp4axch" path="res://assets/textures/items/heart.png" id="2_7u4ye"]
+[ext_resource type="AudioStream" uid="uid://bl3njar4rqotb" path="res://assets/sfx/powerUp.wav" id="3_822yh"]
+[ext_resource type="Script" uid="uid://l7uklhpfvvv2" path="res://audio_self_destruct.gd" id="4_xwmfp"]
+
+[sub_resource type="Curve" id="Curve_74k48"]
+_data = [Vector2(0.50757575, 1), 0.0, 0.0, 0, 0, Vector2(0.9924243, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_c2rxh"]
+curve = SubResource("Curve_74k48")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c2rxh"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 229.42
+initial_velocity_max = 229.42
+angular_velocity_min = 110.11998
+angular_velocity_max = 245.64998
+gravity = Vector3(0, 0, 0)
+scale_min = 15.87
+scale_max = 15.87
+color = Color(0.84204584, 0.14503443, 0.41314435, 1)
+alpha_curve = SubResource("CurveTexture_c2rxh")
+hue_variation_min = -0.22000001
+hue_variation_max = 0.19999997
+
+[node name="Heart" type="CharacterBody2D"]
+script = ExtResource("1_3weh3")
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+z_index = -1
+lifetime = 0.59
+process_material = SubResource("ParticleProcessMaterial_c2rxh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_7u4ye")
+
+[node name="PowerUpSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_822yh")
+script = ExtResource("4_xwmfp")
