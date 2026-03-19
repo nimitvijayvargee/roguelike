@@ -1,6 +1,8 @@
 shader_type canvas_item;
 
 uniform float hue_shift : hint_range(-1.0, 1.0) = 0.0;
+uniform float saturation_shift : hint_range(-1.0, 1.0) = 0.0;
+uniform float value_shift : hint_range(-1.0, 1.0) = 0.0;
 
 vec3 rgb2hsv(vec3 c){
     vec4 K = vec4(0.0, -1.0/3.0, 2.0/3.0, -1.0);
@@ -20,8 +22,10 @@ void fragment(){
     vec4 tex = texture(TEXTURE, UV);
 
     vec3 hsv = rgb2hsv(tex.rgb);
-    hsv.x = fract(hsv.x + hue_shift);   // rotate hue
-    tex.rgb = hsv2rgb(hsv);
+    hsv.x = fract(hsv.x + hue_shift);
+    hsv.y = clamp(hsv.y + (saturation_shift * 0.5), 0.0, 1.0);
+    hsv.z = clamp(hsv.z + (value_shift * 0.3), 0.0, 1.0);
 
-    COLOR = tex;
+    vec3 rgb = hsv2rgb(hsv);
+    COLOR = vec4(rgb, tex.a);
 }

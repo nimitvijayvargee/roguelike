@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkqhlfov8g2fh"]
+[gd_scene format=3 uid="uid://dkqhlfov8g2fh"]
 
 [ext_resource type="Script" uid="uid://c0rdt8te6pwrc" path="res://items/coin.gd" id="1_omk8p"]
 [ext_resource type="Texture2D" uid="uid://clhmm2831qs30" path="res://assets/textures/items/coin.png" id="2_gnov0"]
@@ -27,17 +27,18 @@ alpha_curve = SubResource("CurveTexture_c2rxh")
 hue_variation_min = -0.28000003
 hue_variation_max = 0.029999977
 
-[node name="Coin" type="CharacterBody2D"]
+[node name="Coin" type="CharacterBody2D" unique_id=28115188]
 script = ExtResource("1_omk8p")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=589031576]
+z_index = 1
 texture = ExtResource("2_gnov0")
 
-[node name="Particles" type="GPUParticles2D" parent="."]
+[node name="Particles" type="GPUParticles2D" parent="." unique_id=56659900]
 z_index = -1
 lifetime = 0.59
 process_material = SubResource("ParticleProcessMaterial_hbuv6")
 
-[node name="CoinSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="CoinSFX" type="AudioStreamPlayer2D" parent="." unique_id=372619827]
 stream = ExtResource("3_omk8p")
 script = ExtResource("4_wg8a5")

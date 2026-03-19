@@ -4,9 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://bvhrbudhfluj2" path="res://icon.svg" id="3_lquwl"]
 [ext_resource type="PackedScene" uid="uid://kjt1l61x1ht5" path="res://camera.tscn" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://bhciaxfv34dqp" path="res://camera.gd" id="4_7mycd"]
+[ext_resource type="Shader" uid="uid://p7kfkxr1pu3j" path="res://camera.gdshader" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://cgi7chrpxjcc3" path="res://color_rect.gd" id="6_7mycd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vw27"]
 size = Vector2(128, 128)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lquwl"]
+shader = ExtResource("5_lquwl")
 
 [node name="main" type="Node2D" unique_id=70257480]
 
@@ -27,3 +32,14 @@ position = Vector2(1, 2)
 script = ExtResource("4_7mycd")
 
 [node name="ROOM" type="Node2D" parent="." unique_id=368621753]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=576335230]
+layer = 6700
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=886591153]
+material = SubResource("ShaderMaterial_lquwl")
+offset_left = -2199.0
+offset_top = -1056.0
+offset_right = 2205.0
+offset_bottom = 1052.0
+script = ExtResource("6_7mycd")

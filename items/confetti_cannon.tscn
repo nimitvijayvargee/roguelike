@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ckb02r7ckyeys"]
+[gd_scene format=3 uid="uid://ckb02r7ckyeys"]
 
 [ext_resource type="Texture2D" uid="uid://d1wf8v0gdiove" path="res://assets/textures/items/confetti_cannon.png" id="1_74k48"]
 [ext_resource type="Script" uid="uid://kx5tjqy1ryd6" path="res://items/confetti_cannon.gd" id="2_c2rxh"]
@@ -27,17 +27,17 @@ alpha_curve = SubResource("CurveTexture_c2rxh")
 hue_variation_min = -0.53000003
 hue_variation_max = 0.17999998
 
-[node name="ConfettiCannon" type="CharacterBody2D"]
+[node name="ConfettiCannon" type="CharacterBody2D" unique_id=1007539783]
 script = ExtResource("2_c2rxh")
 
-[node name="Particles" type="GPUParticles2D" parent="."]
+[node name="Particles" type="GPUParticles2D" parent="." unique_id=1551191968]
 z_index = -1
 lifetime = 0.59
 process_material = SubResource("ParticleProcessMaterial_c2rxh")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=365693053]
 texture = ExtResource("1_74k48")
 
-[node name="PowerUpSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="PowerUpSFX" type="AudioStreamPlayer2D" parent="." unique_id=934783399]
 stream = ExtResource("3_gh746")
 script = ExtResource("3_ws6ei")
