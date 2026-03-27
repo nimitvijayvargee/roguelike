@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dgsxg70lofgc2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1akh0"]
+bg_color = Color(0.38339505, 0.6801624, 0.4028636, 0.12156863)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_detail = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5kg4"]
+bg_color = Color(0.2968, 0.56, 0.3275067, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+
+[node name="Camera" type="Camera2D" unique_id=1057100654]
+zoom = Vector2(0.4, 0.4)
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=911448685]
+offset_left = -1440.0
+offset_top = 743.0
+offset_right = -309.0
+offset_bottom = 810.0
+theme_override_styles/background = SubResource("StyleBoxFlat_1akh0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_u5kg4")
+value = 50.0
+show_percentage = false
