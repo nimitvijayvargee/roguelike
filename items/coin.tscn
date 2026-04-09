@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://clhmm2831qs30" path="res://assets/textures/items/coin.png" id="1_1lg1i"]
 [ext_resource type="Script" uid="uid://c0vxaagl3ur8u" path="res://items/scripts/coin.gd" id="1_6dw85"]
+[ext_resource type="AudioStream" uid="uid://bu2t3gbu2r6cx" path="res://assets/sfx/coin.wav" id="3_qr5ih"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6dw85"]
 size = Vector2(105, 160)
@@ -15,3 +16,6 @@ shape = SubResource("RectangleShape2D_6dw85")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=944011472]
 texture = ExtResource("1_1lg1i")
+
+[node name="PickUp" type="AudioStreamPlayer2D" parent="." unique_id=2035361941]
+stream = ExtResource("3_qr5ih")

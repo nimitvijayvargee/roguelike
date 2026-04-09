@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dhlnh3yn7cd7t"]
+
+[ext_resource type="Script" uid="uid://eh6v3e6r8rr8" path="res://items/scripts/psychedelics.gd" id="1_j1hig"]
+[ext_resource type="Shader" uid="uid://ja4mfdl1ti20" path="res://levels/hue_shift.gdshader" id="2_1a0i4"]
+[ext_resource type="AudioStream" uid="uid://bu2t3gbu2r6cx" path="res://assets/sfx/coin.wav" id="3_1a0i4"]
+[ext_resource type="Texture2D" uid="uid://dti3mgaieo323" path="res://assets/textures/items/drug.png" id="3_iy6tt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6dw85"]
+size = Vector2(160, 160)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7650i"]
+shader = ExtResource("2_1a0i4")
+shader_parameter/hue_shift = -0.6589999838025
+shader_parameter/saturation_shift = 0.6000000760000002
+shader_parameter/value_shift = -0.13799995905499995
+
+[node name="Psychedelics" type="Area2D" unique_id=1696670559]
+script = ExtResource("1_j1hig")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1748889614]
+shape = SubResource("RectangleShape2D_6dw85")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=944011472]
+material = SubResource("ShaderMaterial_7650i")
+texture = ExtResource("3_iy6tt")
+
+[node name="PickUp" type="AudioStreamPlayer2D" parent="." unique_id=2035361941]
+stream = ExtResource("3_1a0i4")

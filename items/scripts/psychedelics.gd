@@ -8,9 +8,8 @@ func _ready() -> void:
 
 func _process(_delta) -> void:
 	if Player in get_overlapping_bodies():
-		Player.stats["coins"] += 1
-		print(Player.stats["coins"])
-		$PickUp.play()
-		$PickUp.reparent(get_parent())
-		queue_free()
-		
+		if Player.effect("psychedelics", 20):
+			$PickUp.play()
+			$PickUp.reparent(get_parent())
+			queue_free()
+	

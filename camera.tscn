@@ -1,29 +1,88 @@
 [gd_scene format=3 uid="uid://dgsxg70lofgc2"]
 
+[ext_resource type="Texture2D" uid="uid://clhmm2831qs30" path="res://assets/textures/items/coin.png" id="1_u5kg4"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1akh0"]
 bg_color = Color(0.38339505, 0.6801624, 0.4028636, 0.12156863)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
 corner_detail = 7
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5kg4"]
 bg_color = Color(0.2968, 0.56, 0.3275067, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_diie0"]
+bg_color = Color(0.7282276, 0.49750328, 0.8074777, 0.12156863)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqjab"]
+bg_color = Color(0.7294118, 0.49803922, 0.80784315, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
 
 [node name="Camera" type="Camera2D" unique_id=1057100654]
 zoom = Vector2(0.4, 0.4)
 
-[node name="ProgressBar" type="ProgressBar" parent="." unique_id=911448685]
+[node name="Health" type="ProgressBar" parent="." unique_id=1196129725]
 offset_left = -1440.0
 offset_top = 743.0
 offset_right = -309.0
 offset_bottom = 810.0
 theme_override_styles/background = SubResource("StyleBoxFlat_1akh0")
 theme_override_styles/fill = SubResource("StyleBoxFlat_u5kg4")
-value = 50.0
 show_percentage = false
+
+[node name="Ammo" type="ProgressBar" parent="." unique_id=1107739693]
+offset_left = -1440.0
+offset_top = 676.0
+offset_right = -309.0
+offset_bottom = 743.0
+theme_override_styles/background = SubResource("StyleBoxFlat_diie0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qqjab")
+show_percentage = false
+
+[node name="Coins" type="Control" parent="." unique_id=1260885424]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -1326.0
+offset_top = 601.0
+offset_right = -1286.0
+offset_bottom = 641.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Coins" unique_id=593300693]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.05
+anchor_top = -0.175
+anchor_right = 2.85
+anchor_bottom = 1.55
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 67
+text = "Coins:"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Coins" unique_id=637923542]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.85
+anchor_top = -0.125
+anchor_right = 0.15
+anchor_bottom = 2.875
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_u5kg4")
+metadata/_edit_use_anchors_ = true

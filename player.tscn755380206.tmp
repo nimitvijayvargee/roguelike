@@ -14,31 +14,15 @@ shader_parameter/value_shift = 0.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sh265"]
 size = Vector2(128, 129)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hqtel"]
-shader = ExtResource("1_hqtel")
-shader_parameter/hue_shift = 0.0
-shader_parameter/saturation_shift = 0.0
-shader_parameter/value_shift = 0.0
-
 [node name="Player" type="CharacterBody2D" unique_id=2020873494]
 material = SubResource("ShaderMaterial_sweqy")
 script = ExtResource("1_onrkg")
 
 [node name="Camera" parent="." unique_id=1057100654 instance=ExtResource("2_i3pqv")]
-use_parent_material = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1508552911]
 texture = ExtResource("1_4flbx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1304629733]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_sh265")
-
-[node name="ColorRect" type="ColorRect" parent="." unique_id=623893044]
-visible = false
-z_index = 4096
-material = SubResource("ShaderMaterial_hqtel")
-offset_left = -1293.0
-offset_top = -632.0
-offset_right = 1587.0
-offset_bottom = 987.0
-color = Color(1, 1, 1, 0)
