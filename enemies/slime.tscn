@@ -2,19 +2,93 @@
 
 [ext_resource type="Script" uid="uid://ci45mqtfncthc" path="res://enemies/slime.gd" id="1_6ftag"]
 [ext_resource type="Texture2D" uid="uid://dgn4dc5hi3p5i" path="res://assets/textures/enemy.png" id="2_qtm3c"]
+[ext_resource type="PackedScene" uid="uid://crgpku8olmnpn" path="res://assets/vfx/explosion.tscn" id="3_n1ijq"]
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_n1ijq"]
-points = PackedVector2Array(-327, -316, 311, -318, 311, 322, -320, 322)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtm3c"]
+size = Vector2(644, 644)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n1ijq"]
+bg_color = Color(0.38339505, 0.6801624, 0.4028636, 0.12156863)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+corner_detail = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mks6d"]
+bg_color = Color(0.2968, 0.56, 0.3275067, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+
+[sub_resource type="Gradient" id="Gradient_8naro"]
+offsets = PackedFloat32Array(0, 0.16403785, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.7287066, 0.7287066, 0.7287066, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tsg42"]
+gradient = SubResource("Gradient_8naro")
+
+[sub_resource type="Gradient" id="Gradient_o6d6v"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i72il"]
+gradient = SubResource("Gradient_o6d6v")
+use_hdr = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n1ijq"]
+lifetime_randomness = 0.2
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_min = 110.24
+initial_velocity_max = 175.86
+angular_velocity_min = -1.6093254e-05
+angular_velocity_max = 143.62997
+gravity = Vector3(0, 0, 0)
+scale_min = 14.17
+scale_max = 39.02
+scale_over_velocity_max = 863.51996
+color = Color(0.8142603, 0.28979775, 0.31793162, 1)
+color_ramp = SubResource("GradientTexture1D_i72il")
+color_initial_ramp = SubResource("GradientTexture1D_tsg42")
+hue_variation_min = 0.009999977
+hue_variation_max = 0.22999997
 
 [node name="Slime" type="CharacterBody2D" unique_id=1531568356]
+scale = Vector2(0.25, 0.25)
+collision_layer = 2
+collision_mask = 512
 script = ExtResource("1_6ftag")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=426692051]
-shape = SubResource("ConvexPolygonShape2D_n1ijq")
+position = Vector2(-6, -2)
+shape = SubResource("RectangleShape2D_qtm3c")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=91719707]
 texture = ExtResource("2_qtm3c")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1688507901]
+navigation_layers = 3
 avoidance_enabled = true
+radius = 146.35
+avoidance_layers = 3
+avoidance_mask = 3
 debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0.21390001, 0.93, 0.81064993, 1)
+
+[node name="Health" type="ProgressBar" parent="." unique_id=1553324646]
+visible = false
+offset_left = -332.0
+offset_top = -396.0
+offset_right = 332.0
+offset_bottom = -329.0
+theme_override_styles/background = SubResource("StyleBoxFlat_n1ijq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mks6d")
+show_percentage = false
+
+[node name="Explosion" parent="." unique_id=521901465 instance=ExtResource("3_n1ijq")]
+scale = Vector2(4, 4)
+lifetime = 1.19
+process_material = SubResource("ParticleProcessMaterial_n1ijq")

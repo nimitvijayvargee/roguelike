@@ -2,14 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://bsxh83t6v2wj4" path="res://assets/textures/projectile_normal.png" id="1_a85iw"]
 [ext_resource type="Script" uid="uid://bpthejnqhja3s" path="res://projectile.gd" id="1_qxf0c"]
+[ext_resource type="AudioStream" uid="uid://reh3ii47l6ea" path="res://assets/sfx/laserShoot.wav" id="3_dgwo2"]
+[ext_resource type="AudioStream" uid="uid://di5ugtmqsey7j" path="res://assets/sfx/wallhit.wav" id="4_sxmqc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qxf0c"]
 radius = 80.224686
 
 [node name="Projectile" type="CharacterBody2D" unique_id=967433950]
 scale = Vector2(0.2, 0.2)
-collision_layer = 0
-collision_mask = 2
+collision_layer = 4
+collision_mask = 514
 script = ExtResource("1_qxf0c")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=150535013]
@@ -17,3 +19,10 @@ texture = ExtResource("1_a85iw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1854574110]
 shape = SubResource("CircleShape2D_qxf0c")
+
+[node name="SFXPew" type="AudioStreamPlayer2D" parent="." unique_id=1025053245]
+stream = ExtResource("3_dgwo2")
+volume_db = -21.412
+
+[node name="SFXWall" type="AudioStreamPlayer2D" parent="." unique_id=769932604]
+stream = ExtResource("4_sxmqc")

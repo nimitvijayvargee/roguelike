@@ -22,6 +22,7 @@ shader_parameter/value_shift = 0.0
 
 [node name="Player" type="CharacterBody2D" unique_id=2020873494]
 material = SubResource("ShaderMaterial_sweqy")
+collision_mask = 512
 script = ExtResource("1_onrkg")
 
 [node name="Camera" parent="." unique_id=1057100654 instance=ExtResource("2_i3pqv")]

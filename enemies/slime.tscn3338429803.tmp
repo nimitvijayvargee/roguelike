@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c5wev1mmwwdjs"]
+
+[ext_resource type="Script" uid="uid://ci45mqtfncthc" path="res://enemies/slime.gd" id="1_6ftag"]
+[ext_resource type="Texture2D" uid="uid://dgn4dc5hi3p5i" path="res://assets/textures/enemy.png" id="2_qtm3c"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_n1ijq"]
+points = PackedVector2Array(-327, -316, 311, -318, 311, 322, -320, 322)
+
+[node name="Slime" type="CharacterBody2D" unique_id=1531568356]
+script = ExtResource("1_6ftag")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=426692051]
+shape = SubResource("ConvexPolygonShape2D_n1ijq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=91719707]
+texture = ExtResource("2_qtm3c")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1688507901]
+avoidance_enabled = true
+debug_enabled = true
